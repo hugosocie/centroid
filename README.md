@@ -1,11 +1,11 @@
-#Starter
+# Centroid
 
-####Install
+#### Install
 
     $ npm install
 
 
-####Config and Environment
+#### Config and Environment
 
 Edit `config.js`
 
