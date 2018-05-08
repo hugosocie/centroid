@@ -10,7 +10,7 @@
 Edit `config.js`
 
 
-####Gulp Tasks
+#### Gulp Tasks
 
     $ gulp
     $ gulp build
