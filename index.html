@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="initial-scale = 1.0, width=device-width, user-scalable=no, maximum-scale=1">
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+
+        <title>Beeroïd</title>
+        <meta name="description" content=""/>
+
+        <link rel="stylesheet" href="http://beeroid.local/dist/css/main.css">
+    </head>
+
+    <body>
+
+        <div id="app">
+            <div id="map"></div>
+            <div id="layout">
+                <section class="panel-left">
+                    <div class="input-group">
+                        <input class="name" type="text" name="name" placeholder="Nom" v-model="me.name">
+                        <input class="color" type="color" name="color" v-model="me.color">
+                    </div>
+                    <div class="input-group">
+                        <form v-on:submit.prevent="geocode">
+                            <input class="address" type="text" name="address" placeholder="Adresse" v-model="me.address">
+                        </form>
+                        <button class="geoloc"
+                            v-bind:class="{ 'localizing' : localizing }"
+                            v-on:click="geolocalizeMe">
+                            <span>⊙</span>
+                        </button>
+                    </div>
+                    <div class="input-group radius">
+                        <span>Rayon :</span>
+                        <input type="range" min="50" max="500" v-model="radius"
+                            v-on:click="draw">
+                        <span>{{ radius }}m</span>
+                    </div>
+                    <div class="users">
+                        <ul>
+                            <li>
+                                <p class="name">
+                                    <span class="dot" v-bind:style="{ background : me.color }"></span>
+                                    {{ me.name }}
+                                </p>
+                            </li>
+                            <li v-for="user in users">
+                                <p class="name">
+                                    <span class="dot" v-bind:style="{ background : user.color }"></span>
+                                    {{ user.name }}
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="interests">
+                    <ul>
+                        <li v-for="interest in interests">
+                            <p class="name">{{ interest.name }}</p>
+                            <p class="address">{{ interest.vicinity }}</p>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTLMPn_lz0QpA80lbhwQeiBBB1n8GvGu0&libraries=places"></script>
+        <script src="http://beeroid.local/dist/js/main.js"></script>
+    </body>
+</html>
